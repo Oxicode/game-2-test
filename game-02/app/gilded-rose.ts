@@ -1,3 +1,11 @@
+export const NAME_BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert';
+export const NAME_AGED = 'Aged Brie';
+export const NAME_CONJURED = 'Conjured Mana Cake';
+export const NAME_SULFURAS = 'Sulfuras, Hand of Ragnaros';
+export const UP = 'UP';
+export const DOWN = 'DOWN';
+export const MAX_QUALITY = 50;
+
 export class Item {
     name: string;
     sellIn: number;
@@ -18,52 +26,62 @@ export class GildedRose {
     }
 
     tick() {
-        for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-                if (this.items[i].quality > 0) {
-                    if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                        this.items[i].quality = this.items[i].quality - 1
-                    }
-                }
+        return this.items.map((item) => {
+            if (![NAME_AGED, NAME_BACKSTAGE].includes(item.name)) {
+                this.qualityChange(item, DOWN);
             } else {
-                if (this.items[i].quality < 50) {
-                    this.items[i].quality = this.items[i].quality + 1
-                    if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (this.items[i].sellIn < 11) {
-                            if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
-                            }
-                        }
-                        if (this.items[i].sellIn < 6) {
-                            if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
-                            }
-                        }
+                if (item.quality < MAX_QUALITY) {
+                    item.quality++;
+
+                    if (item.name === NAME_BACKSTAGE) {
+                        if (item.sellIn < 11) { this.qualityChange(item, UP); }
+                        if (item.sellIn < 6) { this.qualityChange(item, UP); }
                     }
                 }
             }
-            if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                this.items[i].sellIn = this.items[i].sellIn - 1;
+
+            if (item.name !== NAME_SULFURAS) {
+                item.sellIn--;
             }
-            if (this.items[i].sellIn < 0) {
-                if (this.items[i].name != 'Aged Brie') {
-                    if (this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (this.items[i].quality > 0) {
-                            if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                                this.items[i].quality = this.items[i].quality - 1
-                            }
-                        }
-                    } else {
-                        this.items[i].quality = this.items[i].quality - this.items[i].quality
-                    }
-                } else {
-                    if (this.items[i].quality < 50) {
-                        this.items[i].quality = this.items[i].quality + 1
-                    }
-                }
+
+            if (item.sellIn >= 0) { return item; }
+
+            if (item.name === NAME_AGED) {
+                this.qualityChange(item, UP);
+                return item;
             }
+
+            if (item.name !== NAME_BACKSTAGE) {
+                this.qualityChange(item, DOWN);
+            } else {
+                this.qualityZero(item);
+            }
+
+            return item;
+        });
+    }
+
+    qualityZero(item: Item): void {
+        item.quality = 0;
+    }
+
+    qualityChange(item: Item, operation: typeof UP | typeof DOWN): void {
+        if (operation === UP) {
+            if (item.quality < MAX_QUALITY) {
+                item.quality++;
+            }
+            return;
         }
 
-        return this.items;
+        if (item.quality <= 0) { return; }
+
+        if (item.name !== NAME_SULFURAS) {
+            item.quality--;
+        }
+
+        if (item.name === NAME_CONJURED) {
+            item.quality--;
+        }
+
     }
 }
