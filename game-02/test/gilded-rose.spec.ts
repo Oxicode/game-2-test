@@ -240,63 +240,63 @@ describe('Gilded Rose', function () {
         });
 
 
-        // context ("Conjured Items", function () {
+         context ("Conjured Items", function () {
 
-        //     it ('updates Conjured items before the sell date', function () {
-        //         const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 10, 10) ]);
+             it ('updates Conjured items before the sell date', function () {
+                 const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 10, 10) ]);
 
-        //         const $item = gildedRose.tick()[0];
+                 const $item = gildedRose.tick()[0];
 
-        //         expect($item.quality).to.equal(8);
-        //         expect($item.sellIn).to.equal(9);
-        //     });
+                 expect($item.quality).to.equal(8);
+                 expect($item.sellIn).to.equal(9);
+             });
 
-        //     it ('updates Conjured items at zero quality', function () {
-        //         const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 0, 10) ]);
+             it ('updates Conjured items at zero quality', function () {
+                 const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 0, 10) ]);
 
-        //         const $item = gildedRose.tick()[0];
+                 const $item = gildedRose.tick()[0];
 
-        //         expect($item.quality).to.equal(0);
-        //         expect($item.sellIn).to.equal(9);
-        //     });
+                 expect($item.quality).to.equal(0);
+                 expect($item.sellIn).to.equal(9);
+             });
 
-        //     it ('updates Conjured items on the sell date', function () {
-        //         const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 10, 0) ]);
+             it ('updates Conjured items on the sell date', function () {
+                 const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 10, 0) ]);
 
-        //         const $item = gildedRose.tick()[0];
+                 const $item = gildedRose.tick()[0];
 
-        //         expect($item.quality).to.equal(6);
-        //         expect($item.sellIn).to.equal(-1);
-        //     });
+                 expect($item.quality).to.equal(6);
+                 expect($item.sellIn).to.equal(-1);
+             });
 
-        //     it ('updates Conjured items on the sell date at 0 quality', function () {
-        //         const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 0, 0) ]);
+             it ('updates Conjured items on the sell date at 0 quality', function () {
+                 const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 0, 0) ]);
 
-        //         const $item = gildedRose.tick()[0];
+                 const $item = gildedRose.tick()[0];
 
-        //         expect($item.quality).to.equal(0);
-        //         expect($item.sellIn).to.equal(-1);
-        //     });
+                 expect($item.quality).to.equal(0);
+                 expect($item.sellIn).to.equal(-1);
+             });
 
-        //     it ('updates Conjured items after the sell date', function () {
-        //         const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 10, -10) ]);
+             it ('updates Conjured items after the sell date', function () {
+                 const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 10, -10) ]);
 
-        //         const $item = gildedRose.tick()[0];
+                 const $item = gildedRose.tick()[0];
 
-        //         expect($item.quality).to.equal(6);
-        //         expect($item.sellIn).to.equal(-11);
-        //     });
+                 expect($item.quality).to.equal(6);
+                 expect($item.sellIn).to.equal(-11);
+             });
 
-        //     it ('updates Conjured items after the sell date at zero quality', function () {
-        //         const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 0, -10) ]);
+             it ('updates Conjured items after the sell date at zero quality', function () {
+                 const gildedRose = new GildedRose([ new Item('Conjured Mana Cake', 0, -10) ]);
 
-        //         const $item = gildedRose.tick()[0];
+                 const $item = gildedRose.tick()[0];
 
-        //         expect($item.quality).to.equal(0);
-        //         expect($item.sellIn).to.equal(-11);
-        //     });
+                 expect($item.quality).to.equal(0);
+                 expect($item.sellIn).to.equal(-11);
+             });
 
-        // });
+        });
 
     });
 
